@@ -3,15 +3,19 @@
     role="grid"
     class="el-month-table">
     <tbody>
-      <tr class="el-date-table__row">
+      <tr>
         <td
           v-for="(item, key) in rows"
           :key="key"
           :class="getCellStyle(item)"
           @click="handleMonthTableClick"
           @mousemove="handleMouseMove">
-          <div>
-            <span class="cell"> 第{{ item.text }}季度 </span>
+          <!-- 根据elementplus版本不同更换类名    "element-plus": "^2.9.1", -->
+          <div class="el-date-table-cell">
+            <!-- 根据elementplus版本不同更换类名    "element-plus": "^2.9.1", -->
+            <span class="el-date-table-cell__text">
+              第{{ item.text }}季度
+            </span>
           </div>
         </td>
       </tr>
@@ -186,8 +190,6 @@ export default defineComponent({
 
     // 鼠标移入时频繁的触发changrange事件 改变maxData 引起rows重新计算 更改样式
     const handleMouseMove = (event) => {
-      console.log('移入');
-
       if (!props.rangeState.selecting) return;
       let target = event.target;
 

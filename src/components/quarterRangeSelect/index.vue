@@ -37,6 +37,7 @@
             <div>{{ rightLabel }}</div>
           </div>
           <BasicQuarterTable
+            class="el-month-table"
             :min-date="minDate"
             :max-date="maxDate"
             :range-state="rangeState"

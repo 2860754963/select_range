@@ -11,12 +11,13 @@
     <div>
       <el-date-picker
         v-model="value2"
-        type="datetimerange"
+        type="monthrange"
         start-placeholder="Start date"
         end-placeholder="End date"
         format="YYYY-MM-DD HH:mm:ss"
         date-format="YYYY/MM/DD ddd"
-        time-format="A hh:mm:ss" />
+        time-format="A hh:mm:ss"
+        :disabled-date="diableDate" />
     </div>
     <h1>年度选择器</h1>
     <div>
@@ -38,13 +39,17 @@ import { ref } from 'vue';
 import quarterRangeSelect from './quarterRangeSelect';
 // import yearRangeSelect from './yearRangeSelect';
 
-let quarterRange = ref(['2021', '2022']);
+let quarterRange = ['2021', '2022'];
 let quarterValue = ref(['2022']);
 const quarterPick = (e) => {
   console.log(e, 'e');
 };
 
 let value2 = ref('');
+const diableDate = (date) => {
+  // 禁用今天及以前
+  return date < new Date();
+};
 </script>
 
 <style scoped></style>
