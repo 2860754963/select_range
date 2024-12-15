@@ -5,25 +5,25 @@
       <quarterRangeSelect
         :range="quarterRange"
         :defaultValue="quarterValue"
-        @pick="quarterPick"></quarterRangeSelect>
-    </div>
-
-    <div>
-      <el-date-picker
-        v-model="value2"
-        type="year"
-        start-placeholder="Start date"
-        end-placeholder="End date"
-        format="YYYY-MM-DD HH:mm:ss"
-        date-format="YYYY/MM/DD ddd"
-        time-format="A hh:mm:ss"
-        :disabled-date="diableDate" />
+        @pick="quarterPick" />
     </div>
     <h1>年度选择器</h1>
     <div>
       <yearRangeSelect
         :range="yearRange"
         v-model="yearRangeValue" />
+    </div>
+
+    <div>
+      <el-date-picker
+        v-model="value2"
+        type="monthrange"
+        start-placeholder="Start date"
+        end-placeholder="End date"
+        format="YYYY-MM-DD HH:mm:ss"
+        date-format="YYYY/MM/DD ddd"
+        time-format="A hh:mm:ss"
+        :disabled-date="diableDate" />
     </div>
   </div>
 </template>
@@ -38,11 +38,31 @@
 
 // import { ref, reactive, watch, computed, onMounted, onUnmounted } from 'vue';
 import { ref } from 'vue';
+import dayjs from 'dayjs';
 import quarterRangeSelect from './quarterRangeSelect';
 import yearRangeSelect from './yearRangeSelect';
+let getCurrentQuarterInfo = () => {
+  const now = dayjs();
 
-let quarterRange = ['2021', '2022'];
-let quarterValue = ref(['2022']);
+  // const currentYear = now.year();
+  const currentQuarter = Math.floor((now.month() + 3) / 3);
+
+  const startOfQuarter = now.startOf('quarter');
+  const endOfQuarter = now.endOf('quarter');
+
+  const quarterInfo = {
+    currentTime: now.format('YYYY-MM-DD HH:mm:ss'),
+    currentQuarter: currentQuarter,
+    startOfQuarter: startOfQuarter.format('YYYY-MM-DD HH:mm:ss'),
+    endOfQuarter: endOfQuarter.format('YYYY-MM-DD HH:mm:ss'),
+  };
+
+  return quarterInfo;
+};
+console.log(getCurrentQuarterInfo(), 'getCurrentQuarterInfo()');
+
+let quarterRange = ['2021', getCurrentQuarterInfo().startOfQuarter]; //可以传年份，也可以传具体的日期
+let quarterValue = ['2023'];
 const quarterPick = (e) => {
   console.log(e, 'e');
 };
