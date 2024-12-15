@@ -10,9 +10,9 @@
           :class="getCellStyle(item)"
           @click="handleMonthTableClick"
           @mousemove="handleMouseMove">
-          <!-- 根据elementplus版本不同更换类名    "element-plus": "^2.9.1", -->
+          <!-- 参考的是 type="monthrange" 根据elementplus版本不同更换类名    "element-plus": "^2.9.1", -->
           <div class="el-date-table-cell">
-            <!-- 根据elementplus版本不同更换类名    "element-plus": "^2.9.1", -->
+            <!-- 参考的是 type="monthrange"  根据elementplus版本不同更换类名    "element-plus": "^2.9.1", -->
             <span class="el-date-table-cell__text">
               第{{ item.text }}季度
             </span>
