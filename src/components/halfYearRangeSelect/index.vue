@@ -89,6 +89,8 @@ export default defineComponent({
       handleRangePick,
       handleChangeRange,
     } = useDatePicker(props);
+    console.log(rangeState, 'rangeState');
+
     const { leftPrevYear, rightNextYear, leftLabel, rightLabel } = useDatePanel(
       {
         leftDate,

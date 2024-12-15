@@ -64,6 +64,8 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    console.log(props, 'props');
+
     const lastRow = ref();
     const lastColumn = ref();
     const tableRows = ref([[], [], []]);
@@ -75,6 +77,7 @@ export default defineComponent({
     };
     const startYear = computed(() => {
       return Math.floor(props.date.year() / 10) * 10;
+      // return props.minDate?.year() || props.date.year();
     });
 
     // 设置单元格样式
@@ -147,11 +150,16 @@ export default defineComponent({
               calEndDate &&
               calTime.isSameOrAfter(calEndDate, 'year')
             );
-
-          if (props.minDate?.isSameOrAfter(calEndDate)) {
+          // 根据给定的日期范围设置单元格的开始和结束状态
+          if (props.minDate.isSameOrAfter(calEndDate)) {
+            console.log(1);
             cell.start = !!(calEndDate && calTime.isSame(calEndDate, 'year'));
             cell.end = props.minDate && calTime.isSame(props.minDate, 'year');
+            console.log(calEndDate, 'calEndDate');
+
+            console.log(cell.start, ' cell.start');
           } else {
+            console.log(2);
             cell.start = !!(
               props.minDate && calTime.isSame(props.minDate, 'year')
             );

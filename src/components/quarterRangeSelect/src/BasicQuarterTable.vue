@@ -113,7 +113,7 @@ export default defineComponent({
           cell.start = !!(
             props.minDate && calTime.isSame(props.minDate, 'quarter')
           );
-          // 当前单元格日期与props.minDate相同，则设置为开始季度
+          // 当前单元格日期与calEndDate相同，则设置为结束季度
           cell.end = !!(calEndDate && calTime.isSame(calEndDate, 'quarter'));
         }
         // 判断当前季度是否是今天所在的季度，如果是，则将单元格类型设置为'today'

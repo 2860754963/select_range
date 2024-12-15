@@ -17,8 +17,9 @@
     <h1>半年选择器</h1>
     <halfYearRangeSelect
       :range="halfYearRange"
-      :defaultValue="halfYearValue" />
-    <!-- <div>
+      :defaultValue="halfYearValue"
+      @pick="halfYearPick" />
+    <div>
       <el-date-picker
         v-model="value2"
         type="monthrange"
@@ -28,7 +29,7 @@
         date-format="YYYY/MM/DD ddd"
         time-format="A hh:mm:ss"
         :disabled-date="diableDate" />
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -46,20 +47,18 @@ import dayjs from 'dayjs';
 import quarterRangeSelect from './quarterRangeSelect';
 import yearRangeSelect from './yearRangeSelect';
 import halfYearRangeSelect from './halfYearRangeSelect';
-// console.log(halfYearRangeSelect, 'halfYearRangeSelect');
 
-let halfYearRange = ['2021', '2025'];
-let halfYearValue = ['2022', '2023'];
+let halfYearRange = ['2020', '2024'];
+let halfYearValue = ['2021-02-01', '2023-09-01'];
+const halfYearPick = (e) => {
+  console.log(e, 'hadlfe');
+};
 
 let getCurrentQuarterInfo = () => {
   const now = dayjs();
-
-  // const currentYear = now.year();
   const currentQuarter = Math.floor((now.month() + 3) / 3);
-
   const startOfQuarter = now.startOf('quarter');
   const endOfQuarter = now.endOf('quarter');
-
   const quarterInfo = {
     currentTime: now.format('YYYY-MM-DD HH:mm:ss'),
     currentQuarter: currentQuarter,
@@ -69,22 +68,22 @@ let getCurrentQuarterInfo = () => {
 
   return quarterInfo;
 };
-// console.log(getCurrentQuarterInfo(), 'getCurrentQuarterInfo()');
+// console.log(getCurrentQuarterInfo(), 'getCurrentQuarterInfo()'); getCurrentQuarterInfo().startOfQuarter
 
-let quarterRange = ['2021', getCurrentQuarterInfo().startOfQuarter]; //可以传年份，也可以传具体的日期
-let quarterValue = ['2023'];
+let quarterRange = ['2020', '2024']; //可以传年份，也可以传具体的日期
+let quarterValue = ['2021', '2022-10-01'];
 const quarterPick = (e) => {
   console.log(e, 'e');
 };
 
-// let value2 = ref('');
-// const diableDate = (date) => {
-//   // 禁用今天及以前
-//   return date < new Date();
-// };
+let yearRange = ['2022', '2025'];
+let yearRangeValue = ref(['2025', '2025']);
 
-let yearRange = ['2021', '2025'];
-let yearRangeValue = ref(['2023', '2024']);
+let value2 = ref('');
+const diableDate = (date) => {
+  // 禁用今天及以前
+  return date < new Date();
+};
 </script>
 
 <style scoped>

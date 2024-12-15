@@ -4,6 +4,8 @@ import dayjs from 'dayjs';
 // 将计算时间的相关操作单独抽一个hooks 之后做年份的时候可以复用 季度，年份时间单位不同而已
 export const useDatePicker = (props) => {
   // 时间范围 超出该范围禁用
+  console.log(props, 'props');
+
   const { range } = props;
 
   const { emit } = getCurrentInstance();
@@ -84,8 +86,11 @@ export const useDatePicker = (props) => {
   const restoreDefault = () => {
     // 将默认转为dayjs时间对象
     const [start, end] = props.modelValue.map((item) => dayjs(item));
+    console.log(start, 'start');
+    console.log(end, 'end');
+
     minDate.value = start;
-    maxDate.value = end;
+    maxDate.value = end || start;
     leftDate.value = start;
     rightDate.value = start.add(1, 'year');
   };

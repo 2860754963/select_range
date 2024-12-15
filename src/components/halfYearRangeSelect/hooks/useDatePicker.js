@@ -1,11 +1,9 @@
+import _ from 'lodash';
 import { getCurrentInstance, watch, ref, unref } from 'vue';
 import dayjs from 'dayjs';
 
 export const useDatePicker = (props) => {
-  console.log(props, 'props');
-
   const { range } = props;
-  console.log(range, 'range123');
 
   const { emit } = getCurrentInstance();
   const minDate = ref();
