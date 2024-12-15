@@ -1,7 +1,7 @@
 <template>
   <table
     role="grid"
-    class="el-year-table el-month-table year-table"
+    class="el-year-table"
     @click="handleYearTableClick"
     @mousemove="handleMouseMove">
     <tbody>
@@ -13,8 +13,9 @@
           :key="key_"
           :class="getCellStyle(cell)"
           @click="handleMonthTableClick">
-          <div>
-            <span class="cell">
+          <!-- 参考的是  type="year"  根据elementplus版本不同更换类名    "element-plus": "^2.9.1", -->
+          <div class="el-date-table-cell">
+            <span class="el-date-table-cell__text">
               {{ cell.text }}
             </span>
           </div>

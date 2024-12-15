@@ -1,5 +1,6 @@
 <template>
-  <div class="el-picker-panel el-date-picker year-panel">
+  <!-- 参考的是  type="year"  根据elementplus版本不同更换类名    "element-plus": "^2.9.1", -->
+  <div class="el-picker-panel el-date-picker">
     <div class="el-picker-panel__body-wrapper">
       <div class="el-picker-panel__body">
         <div class="el-date-picker__header el-date-picker__header--bordered">
