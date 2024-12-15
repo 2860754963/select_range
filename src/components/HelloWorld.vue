@@ -14,7 +14,10 @@
         :range="yearRange"
         v-model="yearRangeValue" />
     </div>
-
+    <h1>半年选择器</h1>
+    <halfYearRangeSelect
+      :range="halfYearRange"
+      :defaultValue="halfYearValue" />
     <!-- <div>
       <el-date-picker
         v-model="value2"
@@ -42,6 +45,12 @@ import { ref } from 'vue';
 import dayjs from 'dayjs';
 import quarterRangeSelect from './quarterRangeSelect';
 import yearRangeSelect from './yearRangeSelect';
+import halfYearRangeSelect from './halfYearRangeSelect';
+// console.log(halfYearRangeSelect, 'halfYearRangeSelect');
+
+let halfYearRange = ['2021', '2025'];
+let halfYearValue = ['2022', '2023'];
+
 let getCurrentQuarterInfo = () => {
   const now = dayjs();
 
@@ -60,7 +69,7 @@ let getCurrentQuarterInfo = () => {
 
   return quarterInfo;
 };
-console.log(getCurrentQuarterInfo(), 'getCurrentQuarterInfo()');
+// console.log(getCurrentQuarterInfo(), 'getCurrentQuarterInfo()');
 
 let quarterRange = ['2021', getCurrentQuarterInfo().startOfQuarter]; //可以传年份，也可以传具体的日期
 let quarterValue = ['2023'];
