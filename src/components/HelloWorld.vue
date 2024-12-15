@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <!-- 2024/12/15 输入框回显暂时未作处理 -->
+  <div class="main">
     <h1>季度选择器</h1>
     <div>
       <quarterRangeSelect
@@ -14,7 +15,7 @@
         v-model="yearRangeValue" />
     </div>
 
-    <div>
+    <!-- <div>
       <el-date-picker
         v-model="value2"
         type="monthrange"
@@ -24,7 +25,7 @@
         date-format="YYYY/MM/DD ddd"
         time-format="A hh:mm:ss"
         :disabled-date="diableDate" />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -67,14 +68,18 @@ const quarterPick = (e) => {
   console.log(e, 'e');
 };
 
-let value2 = ref('');
-const diableDate = (date) => {
-  // 禁用今天及以前
-  return date < new Date();
-};
+// let value2 = ref('');
+// const diableDate = (date) => {
+//   // 禁用今天及以前
+//   return date < new Date();
+// };
 
 let yearRange = ['2021', '2025'];
 let yearRangeValue = ref(['2023', '2024']);
 </script>
 
-<style scoped></style>
+<style scoped>
+.main {
+  height: 100vh;
+}
+</style>
