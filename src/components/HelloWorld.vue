@@ -1,58 +1,50 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div>
+    <h1>季度选择器</h1>
+    <div>
+      <quarterRangeSelect
+        :range="quarterRange"
+        :defaultValue="quarterValue"
+        @pick="quarterPick"></quarterRangeSelect>
+    </div>
+
+    <div>
+      <el-date-picker
+        v-model="value2"
+        type="datetimerange"
+        start-placeholder="Start date"
+        end-placeholder="End date"
+        format="YYYY-MM-DD HH:mm:ss"
+        date-format="YYYY/MM/DD ddd"
+        time-format="A hh:mm:ss" />
+    </div>
+    <h1>年度选择器</h1>
+    <div>
+      <!-- <yearRangeSelect></yearRangeSelect> -->
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+<script setup>
+/*
+ * @Author: Nigulasi
+ * @Date: 2024-12-15 11:54:13
+ * @Last Modified by: Nigulasi
+ * @Describe: useRange
+ */
+
+// import { ref, reactive, watch, computed, onMounted, onUnmounted } from 'vue';
+import { ref } from 'vue';
+import quarterRangeSelect from './quarterRangeSelect';
+// import yearRangeSelect from './yearRangeSelect';
+
+let quarterRange = ref(['2021', '2022']);
+let quarterValue = ref(['2022']);
+const quarterPick = (e) => {
+  console.log(e, 'e');
+};
+
+let value2 = ref('');
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+<style scoped></style>
