@@ -51,7 +51,7 @@ import yearRangeSelect from './yearRangeSelect';
 import halfYearRangeSelect from './halfYearRangeSelect';
 
 let halfYearRange = ['2020', '2024'];
-let halfYearValue = ['2021-02-01', '2023-09-01'];
+let halfYearValue = ['2021', '2022-09-01'];
 const halfYearPick = (e) => {
   console.log(e, 'hadlfe');
 };

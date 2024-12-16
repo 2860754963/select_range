@@ -54,8 +54,6 @@ export const useDatePicker = (props) => {
     const _maxDate = unref(maxDate);
 
     if (isValidRange([_minDate, _maxDate])) {
-      console.log(123123);
-
       // eslint-disable-next-line no-undef
       emit('pick', [_minDate, _maxDate]);
     }

@@ -70,7 +70,7 @@ export default defineComponent({
           .add(6, 'month')
           .subtract(1, 'day');
         const cell = {
-          text: i === 0 ? 'H1' : 'H2',
+          text: i === 0 ? '上半年' : '下半年',
           inRange:
             props.minDate &&
             props.maxDate &&
@@ -112,7 +112,7 @@ export default defineComponent({
       if (target?.tagName !== 'TD') return;
       if (hasClass(target, 'disabled')) return;
       let itemText = event.target.innerText.trim();
-      const isH1 = itemText === 'H1';
+      const isH1 = itemText === '上半年';
       const newDate = props.date.startOf('year').add(isH1 ? 0 : 6, 'month');
 
       if (!props.rangeState.selecting) {
