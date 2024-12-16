@@ -34,7 +34,10 @@ export const useDatePicker = (props) => {
   };
 
   const isValidRange = (range) => {
-    if (!_.isArray(range)) return false;
+    if (!_.isArray(range)) {
+      console.warn('传入时间范围不是数组');
+      return false;
+    }
     const [left, right] = range;
     return (
       dayjs.isDayjs(left) && dayjs.isDayjs(right) && left.isSameOrBefore(right)
@@ -62,7 +65,15 @@ export const useDatePicker = (props) => {
   };
 
   const restoreDefault = () => {
-    const [start, end] = props.defaultValue.map((item) => dayjs(item));
+    if (!props.defaultValue || !props.defaultValue.length) {
+      return console.warn('请填默认值');
+    }
+    const tempArr = props.defaultValue.map((item) => dayjs(item));
+    let start = tempArr[0];
+    let end = tempArr[1] || tempArr[0];
+    if (start.isSameOrAfter(end)) {
+      [start, end] = [end, start];
+    }
     minDate.value = start;
     maxDate.value = end;
     leftDate.value = start;
@@ -82,14 +93,14 @@ export const useDatePicker = (props) => {
   );
 
   return {
-    minDate,
-    maxDate,
-    leftDate,
-    rightDate,
-    rangeState,
-    disabledDate,
-    handleRangePick,
-    onSelect,
-    handleChangeRange,
+    minDate, //默认值的开始时间
+    maxDate, //默认值的结束时间 或者是 默认值的开始时间
+    leftDate, //左侧面板日期  默认值的开始时间
+    rightDate, //右侧面板日期  默认值的开始时间加一年
+    rangeState, //范围状态
+    disabledDate, //禁用日期
+    handleRangePick, //处理范围选择
+    onSelect, // 选择日期
+    handleChangeRange, //处理范围选择
   };
 };

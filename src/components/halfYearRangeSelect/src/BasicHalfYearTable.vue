@@ -60,17 +60,33 @@ export default defineComponent({
   },
   emits: ['pick', 'select', 'changerange'],
   setup(props, { emit }) {
+    console.log('🚀🚀🚀 ~ setup ~ props🚀🚀🚀', props);
     const rows = computed(() => {
       const rows = [];
-      const startOfYear = props.date.startOf('year');
-      for (let i = 0; i < 2; i++) {
-        const halfYearStart = startOfYear.add(i * 6, 'month');
-        const halfYearEnd = halfYearStart
+      const startOfYear = props.date.startOf('year'); //传入日期的开始年份
+      const endOfYear = startOfYear.clone().add(6, 'month').endOf('year');
+      for (let i = 1; i <= 2; i++) {
+        const halfYearStart = startOfYear.add((i - 1) * 6, 'month');
+        //半年开始时间
+
+        const halfYearEnd = dayjs(halfYearStart)
           .clone()
           .add(6, 'month')
           .subtract(1, 'day');
+        //半年结束时间
+        console.log('🚀🚀🚀 ~ rows ~ halfYearStart🚀🚀🚀', halfYearStart);
+        console.log('🚀🚀🚀 ~ rows ~ halfYearEnd🚀🚀🚀', halfYearEnd);
+        console.log(
+          '🚀🚀🚀 ~ rows ~  props.minDate🚀🚀🚀',
+          dayjs(props.minDate).format('YYYY-MM-DD')
+        );
+        console.log(
+          '🚀🚀🚀 ~ rows ~ props.maxDate🚀🚀🚀',
+          dayjs(props.maxDate).format('YYYY-MM-DD')
+        );
+
         const cell = {
-          text: i === 0 ? '上半年' : '下半年',
+          text: i === 1 ? '上半年' : '下半年',
           inRange:
             props.minDate &&
             props.maxDate &&

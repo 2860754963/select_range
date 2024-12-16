@@ -20,9 +20,9 @@ export const useDatePanel = ({ leftDate, rightDate }) => {
   });
 
   return {
-    leftPrevYear,
-    rightNextYear,
-    leftLabel,
-    rightLabel,
+    leftPrevYear, //面板左侧按钮
+    rightNextYear, //面板右侧按钮
+    leftLabel, //面板左侧年份标签
+    rightLabel, //面板右侧年份标签
   };
 };

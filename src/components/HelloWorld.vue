@@ -20,7 +20,7 @@
       :defaultValue="halfYearValue"
       @pick="halfYearPick" />
     <div>
-      <el-date-picker
+      <!-- <el-date-picker
         v-model="value2"
         type="monthrange"
         start-placeholder="Start date"
@@ -28,7 +28,7 @@
         format="YYYY-MM-DD HH:mm:ss"
         date-format="YYYY/MM/DD ddd"
         time-format="A hh:mm:ss"
-        :disabled-date="diableDate" />
+        :disabled-date="diableDate" /> -->
     </div>
 
     <div></div>
@@ -51,9 +51,17 @@ import yearRangeSelect from './yearRangeSelect';
 import halfYearRangeSelect from './halfYearRangeSelect';
 
 let halfYearRange = ['2020', '2024'];
-let halfYearValue = ['2021', '2022-09-01'];
+let halfYearValue = [dayjs('2021'), dayjs('2022-7')];
 const halfYearPick = (e) => {
-  console.log(e, 'hadlfe');
+  let [start, end] = e;
+  console.log(
+    '🚀🚀🚀 ~ halfYearPick ~ start🚀🚀🚀',
+    dayjs(start).format('YYYY-MM-DD')
+  );
+  console.log(
+    '🚀🚀🚀 ~ halfYearPick ~ end🚀🚀🚀',
+    dayjs(end).format('YYYY-MM-DD')
+  );
 };
 
 let getCurrentQuarterInfo = () => {
