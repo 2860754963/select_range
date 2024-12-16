@@ -51,7 +51,7 @@ import yearRangeSelect from './yearRangeSelect';
 import halfYearRangeSelect from './halfYearRangeSelect';
 
 let halfYearRange = ['2020', '2024'];
-let halfYearValue = [dayjs('2021'), dayjs('2022-7')];
+let halfYearValue = [dayjs('2021-01-01'), dayjs('2022-12-31')];
 const halfYearPick = (e) => {
   let [start, end] = e;
   console.log(

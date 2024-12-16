@@ -130,6 +130,7 @@ export default defineComponent({
       let itemText = event.target.innerText.trim();
       const isH1 = itemText === '上半年';
       const newDate = props.date.startOf('year').add(isH1 ? 0 : 6, 'month');
+      console.log('🚀🚀🚀 ~ handleHalfYearTableClick ~ newDate🚀🚀🚀', newDate);
 
       if (!props.rangeState.selecting) {
         emit('pick', { minDate: newDate, maxDate: null });
