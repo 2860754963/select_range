@@ -27,7 +27,6 @@
 <script>
 import { computed, defineComponent, ref } from 'vue';
 import dayjs from 'dayjs';
-
 export default defineComponent({
   name: 'BasicYearTable',
   props: {
@@ -67,15 +66,9 @@ export default defineComponent({
     const lastRow = ref();
     const lastColumn = ref();
     const tableRows = ref([[], [], []]);
-    const hasClass = (el, cls) => {
-      if (!el || !cls) return false;
-      if (cls.includes(' '))
-        throw new Error('className should not contain space.');
-      return el.classList.contains(cls);
-    };
+
     const startYear = computed(() => {
       return Math.floor(props.date.year() / 10) * 10;
-      // return props.minDate?.year() || props.date.year();
     });
 
     // 设置单元格样式
@@ -148,8 +141,8 @@ export default defineComponent({
               calEndDate &&
               calTime.isSameOrAfter(calEndDate, 'year')
             );
-          // 根据给定的日期范围设置单元格的开始和结束状态
-          if (props.minDate.isSameOrAfter(calEndDate)) {
+
+          if (props.minDate?.isSameOrAfter(calEndDate)) {
             cell.start = !!(calEndDate && calTime.isSame(calEndDate, 'year'));
             cell.end = props.minDate && calTime.isSame(props.minDate, 'year');
           } else {
@@ -199,6 +192,13 @@ export default defineComponent({
           endDate: props.date.startOf('year').add(row * 4 + column, 'year'),
         });
       }
+    };
+
+    const hasClass = (el, cls) => {
+      if (!el || !cls) return false;
+      if (cls.includes(' '))
+        throw new Error('className should not contain space.');
+      return el.classList.contains(cls);
     };
 
     const handleMonthTableClick = (event) => {

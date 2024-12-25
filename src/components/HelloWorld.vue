@@ -8,6 +8,7 @@
         @pick="quarterPick" />
     </div>
     <h1>年度选择器</h1>
+    <div>{{ yearRangeValue }}</div>
     <div>
       <yearRangeSelect
         :range="yearRange"
@@ -49,20 +50,6 @@ import quarterRangeSelect from './quarterRangeSelect';
 import yearRangeSelect from './yearRangeSelect';
 import halfYearRangeSelect from './halfYearRangeSelect';
 
-let halfYearRange = ['2020', '2024'];
-let halfYearValue = [dayjs('2021-01-01'), dayjs('2021-12-31')];
-const halfYearPick = (e) => {
-  let [start, end] = e;
-  console.log(
-    '🚀🚀🚀 ~ halfYearPick ~ start🚀🚀🚀',
-    dayjs(start).format('YYYY-MM-DD')
-  );
-  console.log(
-    '🚀🚀🚀 ~ halfYearPick ~ end🚀🚀🚀',
-    dayjs(end).format('YYYY-MM-DD')
-  );
-};
-
 let getCurrentQuarterInfo = () => {
   const now = dayjs();
   const currentQuarter = Math.floor((now.month() + 3) / 3);
@@ -77,22 +64,26 @@ let getCurrentQuarterInfo = () => {
 
   return quarterInfo;
 };
-// console.log(getCurrentQuarterInfo(), 'getCurrentQuarterInfo()'); getCurrentQuarterInfo().startOfQuarter
 
+// 半年选择器
+let halfYearRange = ['2020', '2024'];
+let halfYearValue = ref([dayjs('2021-01-01'), dayjs('2021-12-31')]);
+const halfYearPick = (e) => {
+  let [start, end] = e;
+  halfYearValue.value = [start, end];
+};
+
+// 季度选择器
 let quarterRange = ['2020', '2024']; //可以传年份，也可以传具体的日期
-let quarterValue = ['2021', '2022-10-01'];
+let quarterValue = ref(['2021', '2022-10-01']);
 const quarterPick = (e) => {
-  console.log(e, 'e');
+  let [start, end] = e;
+  quarterValue.value = [start, end];
 };
 
-let yearRange = ['2022', '2025'];
-let yearRangeValue = ref(['2025', '2025']);
-
-let value2 = ref('');
-const diableDate = (date) => {
-  // 禁用今天及以前
-  return date < new Date();
-};
+// 年份选择器
+let yearRange = ['2022', '2027'];
+let yearRangeValue = ref(['2024', '2025']);
 </script>
 
 <style scoped>

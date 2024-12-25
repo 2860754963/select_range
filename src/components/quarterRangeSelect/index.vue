@@ -93,7 +93,8 @@
   </div>
 </template>
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
+import dayjs from 'dayjs';
 import { useDatePicker } from './hooks/useDatePicker';
 import { useDatePanel } from './hooks/useDatePanel';
 import BasicQuarterTable from './src/BasicQuarterTable.vue';
@@ -145,8 +146,52 @@ export default defineComponent({
         rightDate,
       }
     );
-    let startValue = '';
-    let endValue = '';
+    let startValue = computed(() => {
+      if (props.defaultValue.length) {
+        if (props.defaultValue.length === 1) {
+          return `${dayjs(props.defaultValue[0]).year()}年第${dayjs(
+            props.defaultValue[0]
+          ).quarter()}季度`;
+        } else if (props.defaultValue.length === 2) {
+          if (
+            dayjs(props.defaultValue[0]).isBefore(dayjs(props.defaultValue[1]))
+          ) {
+            return `${dayjs(props.defaultValue[0]).year()}年第${dayjs(
+              props.defaultValue[0]
+            ).quarter()}季度`;
+          } else {
+            return `${dayjs(props.defaultValue[1]).year()}年第${dayjs(
+              props.defaultValue[1]
+            ).quarter()}季度`;
+          }
+        }
+      } else {
+        return '';
+      }
+    });
+    let endValue = computed(() => {
+      if (props.defaultValue.length) {
+        if (props.defaultValue.length === 1) {
+          return `${dayjs(props.defaultValue[0]).year()}年第${dayjs(
+            props.defaultValue[0]
+          ).quarter()}季度`;
+        } else if (props.defaultValue.length === 2) {
+          if (
+            dayjs(props.defaultValue[0]).isBefore(dayjs(props.defaultValue[1]))
+          ) {
+            return `${dayjs(props.defaultValue[1]).year()}年第${dayjs(
+              props.defaultValue[1]
+            ).quarter()}季度`;
+          } else {
+            return `${dayjs(props.defaultValue[0]).year()}年第${dayjs(
+              props.defaultValue[0]
+            ).quarter()}季度`;
+          }
+        }
+      } else {
+        return '';
+      }
+    });
     return {
       minDate,
       maxDate,

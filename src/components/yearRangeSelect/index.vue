@@ -132,6 +132,9 @@ export default defineComponent({
       minDate,
     });
 
+    let startValue = '';
+    let endValue = '';
+
     return {
       minDate,
       maxDate,
@@ -143,6 +146,8 @@ export default defineComponent({
       handleRangePick,
       onSelect,
       handleChangeRange,
+      startValue,
+      endValue,
     };
   },
 });
