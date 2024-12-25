@@ -1,5 +1,4 @@
 <template>
-  <!-- 2024/12/15 输入框回显暂时未作处理 -->
   <div class="main">
     <h1>季度选择器</h1>
     <div>
@@ -51,7 +50,7 @@ import yearRangeSelect from './yearRangeSelect';
 import halfYearRangeSelect from './halfYearRangeSelect';
 
 let halfYearRange = ['2020', '2024'];
-let halfYearValue = [dayjs('2021-01-01'), dayjs('2022-12-31')];
+let halfYearValue = [dayjs('2021-01-01'), dayjs('2021-12-31')];
 const halfYearPick = (e) => {
   let [start, end] = e;
   console.log(

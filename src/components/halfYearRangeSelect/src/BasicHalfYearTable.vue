@@ -74,17 +74,6 @@ export default defineComponent({
           .add(6, 'month')
           .subtract(1, 'day');
         //半年结束时间
-        console.log('🚀🚀🚀 ~ rows ~ halfYearStart🚀🚀🚀', halfYearStart);
-        console.log('🚀🚀🚀 ~ rows ~ halfYearEnd🚀🚀🚀', halfYearEnd);
-        console.log(
-          '🚀🚀🚀 ~ rows ~  props.minDate🚀🚀🚀',
-          dayjs(props.minDate).format('YYYY-MM-DD')
-        );
-        console.log(
-          '🚀🚀🚀 ~ rows ~ props.maxDate🚀🚀🚀',
-          dayjs(props.maxDate).format('YYYY-MM-DD')
-        );
-
         const cell = {
           text: i === 1 ? '上半年' : '下半年',
           inRange:
@@ -130,7 +119,6 @@ export default defineComponent({
       let itemText = event.target.innerText.trim();
       const isH1 = itemText === '上半年';
       const newDate = props.date.startOf('year').add(isH1 ? 0 : 6, 'month');
-      console.log('🚀🚀🚀 ~ handleHalfYearTableClick ~ newDate🚀🚀🚀', newDate);
 
       if (!props.rangeState.selecting) {
         emit('pick', { minDate: newDate, maxDate: null });
