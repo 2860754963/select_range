@@ -84,7 +84,7 @@
   </el-popover>
 </template>
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useDatePicker } from './hooks/useDatePicker';
 import { useDatePanel } from './hooks/useDatePanel';
 import BasicYearTable from './src/BasicYearTable.vue';
@@ -132,8 +132,21 @@ export default defineComponent({
       minDate,
     });
 
-    let startValue = '';
-    let endValue = '';
+    const startValue = computed(() => {
+      if (minDate.value) {
+        return minDate.value.format('YYYY') + '年';
+      } else {
+        return '';
+      }
+    });
+
+    const endValue = computed(() => {
+      if (maxDate.value) {
+        return maxDate.value.format('YYYY') + '年';
+      } else {
+        return '';
+      }
+    });
 
     return {
       minDate,
@@ -152,11 +165,11 @@ export default defineComponent({
   },
 });
 </script>
-<style>
+<style scoped>
 .year-panel {
   width: 100%;
 }
-.year-panel .el-picker-panel__content {
+.year-panel :deep(.el-picker-panel__content) {
   width: 100%;
   margin: 0px;
 }

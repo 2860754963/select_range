@@ -8,7 +8,6 @@
         @pick="quarterPick" />
     </div>
     <h1>年度选择器</h1>
-    <div>{{ yearRangeValue }}</div>
     <div>
       <yearRangeSelect
         :range="yearRange"
@@ -82,7 +81,7 @@ const quarterPick = (e) => {
 };
 
 // 年份选择器
-let yearRange = ['2022', '2027'];
+let yearRange = ['2021', '2028'];
 let yearRangeValue = ref(['2024', '2025']);
 </script>
 

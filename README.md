@@ -1,24 +1,27 @@
 # select_range
 
+项目采用版本 "element-plus": "^2.9.1", 如果样式不生效，请更换相应类名
+
 ## Project setup
+
 ```
-yarn install
+npm run pinstall
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-yarn serve
+npm run dev
 ```
 
 ### Compiles and minifies for production
+
 ```
-yarn build
+npm run build
 ```
 
 ### Lints and fixes files
-```
-yarn lint
+
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```

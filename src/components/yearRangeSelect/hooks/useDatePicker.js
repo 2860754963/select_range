@@ -11,14 +11,10 @@ export const useDatePicker = (props) => {
   const minDate = ref();
   // 默认值结束时间
   const maxDate = ref();
-  // 左侧面板时间 ps：面板时间与默认值时间无关 只是用于面板title显示 不需要过于纠结
-  const leftDate = ref();
-  // 右侧面板时间
-  const rightDate = ref();
 
   const rangeState = ref({
     endDate: null,
-    selecing: false,
+    selecting: false,
   });
 
   const disabledDate = (cell) => {
@@ -42,17 +38,18 @@ export const useDatePicker = (props) => {
   };
 
   const handleChangeRange = (val) => {
-    rangeState.value = val;
+    // 更新范围状态时同时更新临时的结束日期
+    rangeState.value = {
+      ...val,
+      endDate: val.endDate ? dayjs(val.endDate).startOf('year') : null
+    };
   };
 
   const isValidRange = (range) => {
-    if (!_.isArray(range)) return false;
-
+    if (!Array.isArray(range) || range.length !== 2) return false;
     const [left, right] = range;
-
-    return (
-      dayjs.isDayjs(left) && dayjs.isDayjs(right) && left.isSameOrBefore(right)
-    );
+    if (!left || !right) return false;
+    return dayjs.isDayjs(left) && dayjs.isDayjs(right) && left.isSameOrBefore(right);
   };
 
   const handleRangeConfirm = () => {
@@ -73,21 +70,38 @@ export const useDatePicker = (props) => {
   const handleRangePick = (val) => {
     const minDate_ = val.minDate;
     const maxDate_ = val.maxDate;
-    if (maxDate.value === maxDate_ && minDate.value === minDate_) {
+    
+    // 添加日期验证
+    if (!minDate_) return;
+    
+    // 第一次选择
+    if (!maxDate_) {
+      minDate.value = dayjs(minDate_).startOf('year');
+      maxDate.value = null;
       return;
     }
-    maxDate.value = maxDate_;
-    minDate.value = minDate_;
+    
+    // 第二次选择
+    const start = dayjs(minDate_).startOf('year');
+    const end = dayjs(maxDate_).startOf('year');
+    
+    // 确保开始日期小于结束日期
+    if (start.isAfter(end)) {
+      minDate.value = end;
+      maxDate.value = start;
+    } else {
+      minDate.value = start;
+      maxDate.value = end;
+    }
+    
     handleRangeConfirm();
   };
 
   const restoreDefault = () => {
-    // 将默认转为dayjs时间对象
+    // 确保 modelValue 是一个包含 dayjs 对象的数组
     const [start, end] = props.modelValue.map((item) => dayjs(item));
     minDate.value = start;
     maxDate.value = end;
-    leftDate.value = start;
-    rightDate.value = start.add(1, 'year');
   };
 
   watch(
@@ -104,8 +118,6 @@ export const useDatePicker = (props) => {
   return {
     minDate,
     maxDate,
-    leftDate,
-    rightDate,
     rangeState,
     disabledDate,
     handleRangePick,
